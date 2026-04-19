@@ -1,0 +1,24 @@
+name: Second workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  say-hello-inline-bash:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "hello from ubuntu"
+      - run: echo "hello from second line in ubuntu"
+
+  say-hello-inline-python:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: print("hello from python shell")
+        shell: python
+
+  say-hello-action:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/hellp-world-javascript-action@v1
+        with:
+          who-to-greet: "from an action in the github action marketplace"
