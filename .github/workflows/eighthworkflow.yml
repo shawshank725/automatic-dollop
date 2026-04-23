@@ -1,0 +1,10 @@
+name: Eighth workflow of making artifacts
+
+on: 
+  workflow_dispatch:
+
+jobs:
+
+  artifact-producer:
+    name: Artifact producer this is 
+    runs-on: ubuntu-24.04
