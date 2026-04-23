@@ -4,7 +4,28 @@ on:
   workflow_dispatch:
 
 jobs:
-
   artifact-producer:
     name: Artifact producer this is 
     runs-on: ubuntu-24.04
+    steps:
+      - name: Create artifact file
+        run: |
+          echo "This is stored as an artifact" > artifact.txt
+          echo "Generate on $(date)" >> artifact.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@4
+        with:
+          name: example-artifact
+          path: artifact.txt
+  artifact-consumer:
+    name: Consume artifact
+    runs-on: ubuntu-24.04
+    needs: artifact-producer
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@4
+        with:
+          name: example-artifact
+      - name: Cat artifact file
+        run: cat artifact.txt
